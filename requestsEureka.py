@@ -12,7 +12,7 @@ html_doc = r.text
 #running the html doc through beatiful soup gives us a
 #beautiful soup object, which represents the document
 # as a nested data structure (what is a nested data structure)
-# --- I dont know why we have to put 'html.parser'
+# --- I dont know why we have to put 'html.parser' - TODO: lookup nested data structure and parser options)
 soup = BeautifulSoup(html_doc, 'html.parser') 
 
 #organize text to make it easy to read:
@@ -23,7 +23,7 @@ soup = BeautifulSoup(html_doc, 'html.parser')
 
 
 #find div that is part of class "view-content", aka main content
-#wrong way of doing it below
+#one way of doing it below
 #content_html = soup.find_all("div", class_="view-content", limit=1)[0]
 #right way of doing it below
 content_html = soup.find(class_="view-content")
@@ -31,11 +31,18 @@ content_html = soup.find(class_="view-content")
 #break content into items
 projects_html_list = content_html.find_all("div", class_="views-row")
 
-keywords = ["app", "application", "VR", "framework", "frameworks", "web scraping", "arduino", "computer vision", "computational", "python", "c++", "coding", "computing", "cybersecurity", "linux", "software development","software engineering", "programming", "machine learning", "networking", "neural", "networks", "raspberry pi", "robot", "math", "mathematics", "computation", "robotics", "engineering", "electronics", "mathematical", "AI", "javascript"]
+keywords = ["app", "application", "VR", "framework", "frameworks", 
+            "web scraping", "arduino", "computer vision", "computational", 
+            "python", "c++", "coding", "computing", "cybersecurity", "linux", 
+            "software development","software engineering", "programming", 
+            "machine learning", "networking", "neural", "networks", "raspberry pi",
+            "robot", "math", "mathematics", "computation", "robotics", "engineering", 
+            "electronics", "mathematical", "AI", "javascript"]
 
-unwanted = ["Border Circuits: Latina/o/e Digital Labor since 1965", "Project LEAP", "Cool Texas fishes in need of further research"]
+unwanted = ["Border Circuits: Latina/o/e Digital Labor since 1965", "Project LEAP",
+            "Cool Texas fishes in need of further research"]
 
-def tags_match(keywords: list[str], text: list[str]) -> bool:
+def tags_match(keywords: list[str], text: list[str]) -> bool: 
     for phrase in text:
         for word in keywords:
             if word in phrase:
